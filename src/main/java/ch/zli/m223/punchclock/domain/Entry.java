@@ -39,4 +39,21 @@ public class Entry {
     public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
     }
+
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable = false)
+    Category category;
+
+    public Category getCategory(){
+        return category;
+    }
+
+    public void setCategory(Category category){
+        this.category = category;
+    }
+
+
+
+
+
 }

@@ -45,16 +45,15 @@ public class EntryController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Overwrite an Entry", description = "The Entry was overwritten")
-    public Entry put(Entry entry) {
-       return entryService.putEntry(entry);
+    public Entry update(Entry entry) {
+       return entryService.update(entry);
     }
 
     @DELETE
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Delete an Entry", description = "The entry is deleted")
-    public void remove(@PathParam("id") Entry entry) {
+    public void remove( Entry entry) {
        entryService.remove(entry);
     }
 

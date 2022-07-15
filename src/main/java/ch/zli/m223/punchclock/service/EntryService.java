@@ -30,9 +30,10 @@ public class EntryService {
     }
 
     @Transactional 
-    public Entry putEntry(Entry entry) {
-        entry = entityManager.find(Entry.class, entry.getId());
-        entityManager.setEntity(entry);
+    public Entry update(Entry entry) {
+    
+        return entityManager.merge(entry);
+        
     }
 
     @Transactional 
