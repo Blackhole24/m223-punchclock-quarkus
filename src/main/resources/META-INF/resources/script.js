@@ -59,7 +59,7 @@ const renderEntries = () => {
         row.appendChild(createCell(entry.id));
         row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
         row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
-        row.appendChild(createCell(new String(category.category).toLocaleString()))
+        row.appendChild(createCell(new Text(category.category).toLocaleString()))
         display.appendChild(row);
     });
 };
