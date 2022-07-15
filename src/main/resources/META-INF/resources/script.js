@@ -5,17 +5,14 @@ const dateAndTimeToDate = (dateString, timeString) => {
     return new Date(`${dateString}T${timeString}`).toISOString();
 };
 
-const category = (category) => {
-    return new String(`${category}`).toISOString();
-};
+let categories = [];
 
 const createEntry = (e) => {
-    e.preventDefault();
     const formData = new FormData(e.target);
     const entry = {};
     entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-    entry['category'] = category(formData.get('category'));
+    entry['category'] = categories[formData.get('category')];
 
     fetch(`${URL}/entries`, {
         method: 'POST',
@@ -59,7 +56,7 @@ const renderEntries = () => {
         row.appendChild(createCell(entry.id));
         row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
         row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
-        row.appendChild(createCell(new Text(category.category).toLocaleString()))
+        row.appendChild(createCell(entry.category.name))
         display.appendChild(row);
     });
 };
@@ -105,16 +102,9 @@ const updateEntry = (e) => {
         body: JSON.stringify(data)
     }).then((result) => {
         result.json().then((entry) => {
-            if(entry.checkIn == undefined) {
-                document.getElementById("errorUpdate").innerText = entry.parameterViolations[0].message;
-            }else {
                 closeUpdateEntryForm();
                 indexEntries();
-            }
+
         });
-    }).catch((result) => {
-        result.json().then((response) => {
-            document.getElementById("errorUpdate").innerText = response.parameterViolations[0].message;
-        });
-    });
+    })
 };

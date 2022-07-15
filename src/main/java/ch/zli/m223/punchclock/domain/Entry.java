@@ -52,6 +52,18 @@ public class Entry {
         this.category = category;
     }
 
+    @ManyToOne
+    @JoinColumn(name="location_id", nullable = false)
+    Location location;
+
+    public Location getLocation(){
+        return location;
+    }
+
+    public void setLocation(Location location){
+        this.location = location;
+    }
+
 
 
 
